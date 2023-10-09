@@ -31,7 +31,10 @@ function FulFillQuoteHtml(currentQuote) {
     authorName.innerHTML = currentQuote.authorName;
 
     let numberOfQuotes = document.querySelector(".numberOfQuotes");
-    numberOfQuotes.innerText = currentQuote.numberOfQuotes + "quotes";
+    numberOfQuotes.innerText = currentQuote.numberOfQuotes + " quotes";
+    
+    let quoteId = document.querySelector(".quoteId");
+    quoteId.innerText = "#"+currentQuote.id;
 }
 
 function DisplayQuote(jsonData) {
