@@ -8,7 +8,12 @@ function GenerateRandomQuote(){
     newQuoteGenerator.addEventListener('click', async function () {
 
         await GetNewQuote();
-    })
+    });
+
+    addEventListener("load", async function () {
+
+        await GetNewQuote();
+    });
 }
 
 export {GenerateRandomQuote};
