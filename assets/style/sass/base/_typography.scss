@@ -1,1 +1,21 @@
-﻿
+﻿.authorName{
+  color:black;
+  font-family: $authorFont;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+.numberOfQuotes{
+  font-family: $authorFont;
+  font-size:1.5rem;
+}
+
+.quoteText{
+  font-family: $quoteFont;
+  font-size: 2rem;
+}
+
+.newQuote{
+  font-family :$authorFont;
+  font-size:1rem;
+} 
