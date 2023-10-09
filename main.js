@@ -1,3 +1,4 @@
-﻿import {GenerateRandomQuote} from "./assets/js/UserActionsListeners.js";
+﻿import {GenerateQuoteOnLoad, GenerateQuoteListener} from "./assets/js/UserActionsListeners.js";
 
-GenerateRandomQuote();
+GenerateQuoteOnLoad();
+GenerateQuoteListener();

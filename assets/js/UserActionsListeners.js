@@ -1,20 +1,29 @@
-﻿import{GetNewQuote} from "./QuotesManager.js";
+﻿import {GenerateQuote} from "./QuotesManager.js";
+import {startLoading, stopLoading} from "./loader.js";
 
-function GenerateRandomQuote(){
+async function GenerateRandomQuote() {
+
+    startLoading();
+    await GenerateQuote();
+    stopLoading();
+
+}
+
+function GenerateQuoteListener() {
 
     let newQuoteGenerator = document.querySelector("button.newQuote");
 
-
-    newQuoteGenerator.addEventListener('click', async function () {
-
-        await GetNewQuote();
-    });
-
-    addEventListener("load", async function () {
-
-        await GetNewQuote();
+    newQuoteGenerator.addEventListener('click', function () {
+        GenerateRandomQuote();
     });
 }
 
-export {GenerateRandomQuote};
+function GenerateQuoteOnLoad() {
+    addEventListener("load", async function () {
+        GenerateRandomQuote();
+
+    });
+}
+
+export {GenerateQuoteOnLoad, GenerateQuoteListener};
 

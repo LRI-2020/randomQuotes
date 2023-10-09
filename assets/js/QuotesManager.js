@@ -1,48 +1,40 @@
 ﻿import {Quote} from "./Quote.js";
+import {GetAuthorAge} from "./Age.js";
 
-
-function GetNewQuote(){
+async function GenerateQuote() {
+    let newQuote = ParseToQuote(await GetRawQuote());
+    let authorAge = await GetAuthorAge();
+    DisplayQuote(newQuote, authorAge);
+}
+function GetRawQuote(){
     
-    fetch("https://thatsthespir.it/api")
+    return fetch("https://thatsthespir.it/api")
         .then((response) => response.json())
-        .then((jsonData) => DisplayQuote(jsonData))
         .catch((e) => alert(e.message));
 }
 
-function ParseToQuote(jsonData) {
-    
-    let text = jsonData.quote;
-    let authorName = jsonData.author;
-    let authorPhoto  =jsonData.photo;
-    let id = jsonData.id;
-    let numberOfQuotes = jsonData.total_quotes;
-    return new Quote(text,authorName,authorPhoto,id, numberOfQuotes);
+function ParseToQuote(rawQuote, authorAge) {
+
+    return new Quote(rawQuote.quote,rawQuote.author,rawQuote.photo,rawQuote.id, rawQuote.total_quotes, authorAge);
 }
 
-function FulFillQuoteHtml(currentQuote) {
-
+function DisplayQuote(quote) {
+    
     let quoteContainer = document.querySelector(".quoteText");
-    quoteContainer.innerText = currentQuote.text;
+    quoteContainer.innerText = quote.text;
 
     let authorPhoto = document.querySelector(".authorPhoto");
-    authorPhoto.setAttribute("src", currentQuote.authorPhoto);
+    authorPhoto.setAttribute("src", quote.authorPhoto);
 
     let authorName = document.querySelector(".authorName");
-    authorName.innerHTML = currentQuote.authorName;
+    authorName.innerHTML = quote.authorName;
 
     let numberOfQuotes = document.querySelector(".numberOfQuotes");
-    numberOfQuotes.innerText = currentQuote.numberOfQuotes + " quotes";
+    numberOfQuotes.innerText = quote.numberOfQuotes + " quotes";
     
     let quoteId = document.querySelector(".quoteId");
-    quoteId.innerText = "#"+currentQuote.id;
+    quoteId.innerText = "#"+quote.id;
 }
 
-function DisplayQuote(jsonData) {
 
-    let currentQuote = ParseToQuote(jsonData);
-
-    FulFillQuoteHtml(currentQuote);
-
-}
-
-export {GetNewQuote}
+export {GenerateQuote}
